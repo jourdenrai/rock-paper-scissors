@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+</body>
+<script>
+    let rounds = 0
+    let playerScore = 0
+    let computerScore = 0
+    function computerPlay(){
+        choices = ['rock','paper','scissors']
+        return choices[Math.floor(Math.random()* 3)]
+    }
+    function playRound(playerSelection, computerSelection){
+        var playerSelection = playerSelection.toLowerCase()
+        if(playerSelection === 'rock' && computerSelection === 'paper'){
+            computerScore++
+            return `You lose! ${computerSelection} beats ${playerSelection}!`
+        }
+        else if(playerSelection === 'paper' && computerSelection === 'scissors'){
+            computerScore++
+            return `You lose! ${computerSelection} beats ${playerSelection}`
+        }
+        else if(playerSelection === 'scissors' && computerSelection === 'rock'){
+            computerScore++
+            return `You lose! ${computerSelection} beats ${playerSelection}`
+        }
+        else if(playerSelection === computerSelection){
+            return `It's a tie!`
+        }
+        else{
+            playerScore++
+            return `You win! ${playerSelection} beats ${computerSelection}`
+        }
+    }
+    function game(){
+        
+        while(rounds < 5){
+            const playerSelection = prompt("rock, paper or scissors?")
+            let computerSelection = computerPlay()
+            console.log(playRound(playerSelection, computerSelection))
+            rounds++
+        }
+        if(computerScore > playerScore){
+            console.log(`Computer Wins! Player: ${playerScore} Computer: ${computerScore}`)
+        }
+        else if(computerScore === playerScore){
+            console.log(`Draw! Player: ${playerScore} Computer: ${computerScore}`)
+        }
+        else{
+            console.log(`Player Wins! Player: ${playerScore} Computer: ${computerScore}`)
+        }
+    }
+    
+    game()
+</script>
