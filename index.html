@@ -1,18 +1,65 @@
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
+    <title>Rock! Paper! Scissors!</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="paper">Scissors</button>
+    <div id="score-div">
+        <h2>Score</h2>
+        <span>Player: <span id="playerScore">0</span></span>
+        <span>Computer: <span id="computerScore">0</span></span>
+    </div>
+    <div id="results"></div>
 
 </body>
 <script>
-    let rounds = 0
+
     let playerScore = 0
     let computerScore = 0
+    
+    var buttons = document.querySelectorAll('button')
+    buttons.forEach((button) => {
+        button.addEventListener('click',(e) =>{
+            
+            var playerSelection = button.id
+            var div = document.querySelector('#results')
+
+            var p = document.createElement('p')
+            p.classList.add('content')
+            p.textContent = playRound(button.id,computerPlay())
+            div.appendChild(p)
+
+            var player_Score = document.querySelector('#playerScore')
+            player_Score.classList.add('content')
+            player_Score.textContent = playerScore
+
+            var computer_Score = document.querySelector('#computerScore')
+            computer_Score.classList.add('content')
+            computer_Score.textContent = computerScore
+            if(playerScore === 5 && computerScore === 5){
+                alet("It's a Draw!")
+                location.reload()
+            }
+            if(playerScore === 5){
+                alert("You Win!")
+                location.reload()
+            }
+            else if(computerScore === 5){
+                alert("You Lose!")
+                location.reload()
+            }
+        })
+    });
+    
     function computerPlay(){
         choices = ['rock','paper','scissors']
         return choices[Math.floor(Math.random()* 3)]
     }
+
     function playRound(playerSelection, computerSelection){
         var playerSelection = playerSelection.toLowerCase()
         if(playerSelection === 'rock' && computerSelection === 'paper'){
@@ -35,24 +82,4 @@
             return `You win! ${playerSelection} beats ${computerSelection}`
         }
     }
-    function game(){
-        
-        while(rounds < 5){
-            const playerSelection = prompt("rock, paper or scissors?")
-            let computerSelection = computerPlay()
-            console.log(playRound(playerSelection, computerSelection))
-            rounds++
-        }
-        if(computerScore > playerScore){
-            console.log(`Computer Wins! Player: ${playerScore} Computer: ${computerScore}`)
-        }
-        else if(computerScore === playerScore){
-            console.log(`Draw! Player: ${playerScore} Computer: ${computerScore}`)
-        }
-        else{
-            console.log(`Player Wins! Player: ${playerScore} Computer: ${computerScore}`)
-        }
-    }
-    
-    game()
 </script>
